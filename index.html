@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI & Data Science Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(245, 175, 175, 0.8);
+            padding: 2rem;
+            text-align: center;
+            transition: background-color 0.3s;
+           
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-size: 24px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .main-nav a:hover {
+            color: #2980b9;
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Skills Section */
+        .skill {
+            margin: 20px 0;
+        }
+
+        .skill-bar {
+            width: 80%;
+            background: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px auto;
+            position: relative;
+        }
+
+        .progress {
+            width: 0;
+            height: 25px;
+            background: #ffcc00;
+            transition: width 2s ease-in-out;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .project {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            width: 60%;
+            max-width: 600px;
+            margin: 10% auto;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Contact Form */
+        input, textarea {
+            display: block;
+            width: 80%;
+            margin: 15px auto;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+            min-height: 44px;
+        }
+
+        button:hover {
+            background: #e6b800;
+        }
+
+        #form-response {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(248, 249, 250, 0.8);
+            margin-top: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #4c4444;
+        }
+
+        .dark-mode header,
+        .dark-mode footer {
+            background-color: rgba(128, 115, 115, 0.8);
+        }
+
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3 {
+            color: #ab9d9d;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #2d2d2d;
+            color: #b8aeae;
+        }
+
+        .dark-mode .project {
+            border-color: #585353;
+            background-color: #222020;
+        }
+
+        .dark-mode input,
+        .dark-mode textarea {
+            background-color: #333;
+            color: #d5cbcb;
+            border-color: #555;
+        }
+
+        /* Typing Cursor */
+        .type-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: #ffcc00;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Floating Nodes (Background) */
+        .floating-nodes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .data-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 204, 0, 0.7);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float-node 15s infinite linear;
+        }
+
+        @keyframes float-node {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .main-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .main-nav a {
+                font-size: 1.5rem;
+                color: white;
+            }
+
+            .content-wrapper {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .skill-bar {
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+                padding: 20px;
+            }
+
+            input, textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <header>
+        <h1 id="typing-text"></h1><span class="type-cursor"></span>
+        <p id="greeting"></p>
+        <p>AI & Data Science Enthusiast</p>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="dark-mode-toggle">🌙 Dark Mode</button>
+    </header>
+
+    <div class="content-wrapper">
+        <section id="about" class="fade-in">
+            <h2>About Me</h2>
+            <p>Hi! I'm a passionate AI and Data Science student exploring ML, Deep Learning, and Big Data. I love transforming raw data into meaningful insights and building intelligent systems that solve real-world problems.</p>
+        </section>
+
+        <section id="skills" class="fade-in">
+            <h2>Skills</h2>
+            <div class="skill">
+                <p>Python</p>
+                <div class="skill-bar"><div class="progress" data-width="90%">90%</div></div>
+            </div>
+            <div class="skill">
+                <p>Machine Learning</p>
+                <div class="skill-bar"><div class="progress" data-width="85%">85%</div></div>
+            </div>
+            <div class="skill">
+                <p>Data Analysis</p>
+                <div class="skill-bar"><div class="progress" data-width="80%">80%</div></div>
+            </div>
+            <div class="skill">
+                <p>Deep Learning</p>
+                <div class="skill-bar"><div class="progress" data-width="75%">75%</div></div>
+            </div>
+        </section>
+
+        <section id="projects" class="fade-in">
+            <h2>Projects</h2>
+            <div class="project" onclick="openModal('modal1')">
+                <h3>AI Chatbot</h3>
+                <p>A chatbot using NLP to answer queries with contextual understanding.</p>
+            </div>
+            <div class="project" onclick="openModal('modal2')">
+                <h3>Fraud Detection System</h3>
+                <p>Machine learning model to detect financial fraud with 95% accuracy.</p>
+            </div>
+            <div class="project" onclick="openModal('modal3')">
+                <h3>Sentiment Analysis</h3>
+                <p>Analyzing customer reviews to determine sentiment polarity.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p id="form-response"></p>
+        </section>
+    </div>
+
+    <!-- Project Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>AI Chatbot</h2>
+            <p>This advanced chatbot uses Natural Language Processing (NLP) techniques including transformer models to understand and respond to user queries in real-time. Key features include:</p>
+            <ul>
+                <li>Contextual conversation memory</li>
+                <li>Multi-language support</li>
+                <li>Integration with knowledge bases</li>
+                <li>Sentiment-aware responses</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Fraud Detection System</h2>
+            <p>A machine learning model designed to detect fraudulent financial transactions with high accuracy. Technical details:</p>
+            <ul>
+                <li>Built with XGBoost and Random Forest algorithms</li>
+                <li>95% detection accuracy with <2% false positives</li>
+                <li>Real-time processing capability</li>
+                <li>Anomaly detection using isolation forests</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Sentiment Analysis</h2>
+            <p>Customer review analysis system that determines sentiment polarity (positive/negative/neutral) with contextual understanding.</p>
+            <ul>
+                <li>BERT-based model fine-tuned on product reviews</li>
+                <li>87% accuracy on multi-domain datasets</li>
+                <li>Aspect-based sentiment extraction</li>
+                <li>Real-time dashboard visualization</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Current Time: <span id="current-time"></span></p>
+        <div class="social-links">
+            <a href="#" aria-label="LinkedIn">LinkedIn</a> | 
+            <a href="#" aria-label="GitHub">GitHub</a> | 
+            <a href="#" aria-label="Twitter">Twitter</a>
+        </div>
+        <p>© <span id="current-year"></span> AI Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating Data Nodes Background -->
+    <div class="floating-nodes" id="floating-nodes"></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // Typing Animation
+        const typingText = document.getElementById("typing-text");
+        const words = ["Welcome to My Portfolio!", "Let's Build the Future!"];
+        let wordIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < words[wordIndex].length) {
+                typingText.textContent += words[wordIndex][charIndex];
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typingText.textContent = words[wordIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            }
+        }
+
+        // Initialize on DOM load
+        document.addEventListener("DOMContentLoaded", () => {
+            type();
+            updateGreeting();
+            updateTime();
+            setupSkillBars();
+            setupDarkMode();
+            setupCurrentYear();
+            setupForm();
+            setupMobileMenu();
+            createFloatingNodes();
+            initParticles();
+        });
+
+        // Greeting Based on Time
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = "Hello!";
+
+            if (hour < 12) {
+                greeting = "Good Morning! 🌞";
+            } else if (hour < 18) {
+                greeting = "Good Afternoon! ☀️";
+            } else {
+                greeting = "Good Evening! 🌙";
+            }
+
+            document.getElementById("greeting").textContent = greeting;
+        }
+
+        // Real-Time Clock
+        function updateTime() {
+            document.getElementById("current-time").textContent = new Date().toLocaleTimeString();
+            setTimeout(updateTime, 1000);
+        }
+
+        // Current Year for Footer
+        function setupCurrentYear() {
+            document.getElementById("current-year").textContent = new Date().getFullYear();
+        }
+
+        // Skills Animation on Scroll
+        function setupSkillBars() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        bar.style.width = bar.getAttribute("data-width");
+                        observer.unobserve(bar);
+                    }
+                });
+            }, {threshold: 0.5});
+            
+            document.querySelectorAll(".progress").forEach(bar => {
+                observer.observe(bar);
+            });
+        }
+
+        // Project Modals
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        // Dark Mode Toggle
+        function setupDarkMode() {
+            const toggle = document.getElementById("dark-mode-toggle");
+            toggle.addEventListener("click", function() {
+                document.body.classList.toggle("dark-mode");
+                this.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+                
+                // Save preference to localStorage
+                localStorage.setItem('darkMode', document.body.classList.contains("dark-mode"));
+            });
+            
+            // Check for saved preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add("dark-mode");
+                toggle.textContent = "☀️ Light Mode";
+            }
+        }
+
+        // Contact Form Handling
+        function setupForm() {
+            const form = document.getElementById("contact-form");
+            const response = document.getElementById("form-response");
+            
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // Show loading state
+                const submitBtn = form.querySelector("button");
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Sending...";
+                
+                // Simulate form submission (replace with actual AJAX call)
+                setTimeout(() => {
+                    response.textContent = "Message sent successfully! I'll get back to you soon. ✅";
+                    response.style.color = "#2ecc71";
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Send Message";
+                    
+                    // Clear success message after 5 seconds
+                    setTimeout(() => {
+                        response.textContent = "";
+                    }, 5000);
+                }, 1500);
+            });
+        }
+
+        // Mobile Menu Toggle
+        function setupMobileMenu() {
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                document.querySelector('.main-nav').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.querySelector('.main-nav').classList.remove('active');
+                });
+            });
+        }
+
+        // Floating Data Nodes
+        function createFloatingNodes() {
+            const container = document.getElementById('floating-nodes');
+            for (let i = 0; i < 15; i++) {
+                const node = document.createElement('div');
+                node.className = 'data-node';
+                node.style.left = Math.random() * 100 + 'vw';
+                node.style.top = Math.random() * 100 + 'vh';
+                node.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(node);
+            }
+        }
+
+        // Particles.js Initialization
+        function initParticles() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffffff",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+    </script>
+</body>
+</html>
